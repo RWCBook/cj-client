@@ -24,6 +24,7 @@ function cj(object, root) {
     g.tvars = {}; // clear item state
     rtn.collection.href = root+"/"+o+"/".replace(/^\/\//,"http://")||"";
     rtn.collection.title = getTitle(object[o]);
+    rtn.collection.content = getContent(object[o]);
     rtn.collection.links = getLinks(object[o].actions);
     rtn.collection.items = getItems(object[o],root);
     rtn.collection.queries = getQueries(object[o].actions);
@@ -46,6 +47,18 @@ function cj(object, root) {
 
 function getTitle(obj) {
   return obj.title||"Cj Representor";
+}
+
+function getContent(obj) {
+  var rtn;
+  
+  if(obj.content) {
+    rtn = obj.content;
+  }
+  else {
+    rtn = {};
+  }
+  return rtn;
 }
 
 // get top-level links
