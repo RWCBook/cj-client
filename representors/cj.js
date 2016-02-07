@@ -41,14 +41,16 @@ function cj(object, root) {
       rtn.collection.error = getError(object.error);
     }
   }
-  
+  // send results to caller
   return JSON.stringify(rtn, null, 2);
 }
 
+// belt out the title
 function getTitle(obj) {
   return obj.title||"Cj Representor";
 }
 
+// handle any content in the response
 function getContent(obj) {
   var rtn;
   
