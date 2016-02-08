@@ -43,6 +43,7 @@ function cj() {
   function parseCj() {
     dump();
     title();
+    content();
     links();
     items();
     queries();
@@ -66,6 +67,16 @@ function cj() {
       elm.innerText = g.cj.collection.title;
       elm = d.tags("title");
       elm[0].innerText = g.cj.collection.title;
+    }
+  }
+
+  // handle content block
+  function content() {
+    var elm;
+
+    elm = d.find("content");
+    if(g.cj.collection.content) {
+      elm.innerHTML = g.cj.collection.content; 
     }
   }
   
@@ -241,7 +252,7 @@ function cj() {
       fs.className = "ui form";
       header = d.node("div");
       header.className = "ui dividing header";
-      header.innerHTML = "Add";
+      header.innerHTML = g.cj.collection.template.prompt||"Add";
       d.push(header,fs);
       for(var data of coll) { 
         p = d.input({prompt:data.prompt+"&nbsp;",name:data.name,value:data.value});
