@@ -198,14 +198,23 @@ function getTemplate(obj) {
         }
         
         // emit data elements
+        data = [];
         for(j=0,y=temp.inputs.length;j<y;j++) {
           d = temp.inputs[j];
-          data.push({name:d.name||"input"+j,value:d.value||"",prompt:d.prompt||d.name});
+          data.push(
+            {
+              name:d.name||"input"+j,
+              value:d.value||"",
+              prompt:d.prompt||d.name
+            }
+          );
         }
       }
     }
   }
+  
   rtn.data = data;
+  
   return rtn;
 }
 

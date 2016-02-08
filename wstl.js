@@ -179,11 +179,11 @@ function loadTrans() {
   });
 
   trans.push({
-    name : "taskFormListByTitle cj",
+    name : "taskFormListByTitle",
     type : "safe",
     action : "read",
     kind : "task",
-    target : "list query hal siren",
+    target : "list query hal siren cj",
     prompt : "Search By Title",
     inputs : [
       {name : "title", prompt : "Title", value : ""}
@@ -191,11 +191,11 @@ function loadTrans() {
   });
 
   trans.push({
-    name : "taskFormListByUser cj",
+    name : "taskFormListByUser",
     type : "safe",
     action : "read",
     kind : "task",
-    target : "list query hal siren",
+    target : "list query hal siren cj",
     prompt : "Search By Assigned User",
     inputs : [
       {name : "assignedUser", prompt : "User", value : ""}
@@ -233,6 +233,18 @@ function loadTrans() {
     kind : "task",
     target : "item hal siren cj read",
     prompt : "Detail",
+    html : {
+      className : "item link ui basic blue button"
+    }
+  });
+
+  trans.push({
+    name : "taskLinkEdit",
+    type : "safe",
+    action : "read",
+    kind : "task",
+    target : "item hal siren cj read",
+    prompt : "Edit User",
     html : {
       className : "item link ui basic blue button"
     }

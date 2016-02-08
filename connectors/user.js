@@ -178,15 +178,15 @@ function sendItemPage(req, res, respond, id) {
       rel:["changepw","edit"],root:root},coll);
     wstl.append({name:"userTasksLink",href:"/task/?assignedUser={id}",
       rel:["tasksByUser","collection"],root:root},coll);
-    
-    // item forms
-    tran = wstl.append({name:"userFormEdit",href:"/user/{key}",
-      rel:["edit-form"],root:root},coll);
-    tran = wstl.append({name:"userFormEditPost",href:"/user/update/{id}",
-      rel:["post-edit","edit-form"],root:root},coll);
-    tran = wstl.append({name:"userFormChangePWPost",href:"/user/pass/{id}",
-      rel:["changepw","edit-form"],root:root},coll);
 
+    // list queries
+    wstl.append({name:"userFormListByNick",href:"/user/",
+      rel:["usersByNick","search"],root:root},coll);
+    wstl.append({name:"userFormListByName",href:"/user/",
+      rel:["usersByName","search"],root:root},coll);
+    wstl.append({name:"userFormListByEmail",href:"/user/",
+      rel:["usersByEmail","search"],root:root},coll);
+        
     // compose and send graph 
     doc = {};
     doc.title = "TPS - Users";
@@ -225,8 +225,6 @@ function sendUpdatePage(req, res, respond, id) {
     // item actions
     wstl.append({name:"userLinkItem",href:"/user/{id}",
       rel:["item"],root:root},coll);
-    wstl.append({name:"userLinkDetail",href:"/user/{id}",
-      rel:["item"],root:root},coll);
     wstl.append({name:"userLinkEdit",href:"/user/update/{id}",
       rel:["edit"],root:root},coll);
     wstl.append({name:"userLinkChangePW",href:"/user/pass/{id}",
@@ -237,6 +235,14 @@ function sendUpdatePage(req, res, respond, id) {
     // item forms
     tran = wstl.append({name:"userFormEditPost",href:"/user/update/{id}",
       rel:["post-changePW","edit-form"],root:root},coll);
+
+    // list queries
+    wstl.append({name:"userFormListByNick",href:"/user/",
+      rel:["usersByNick","search"],root:root},coll);
+    wstl.append({name:"userFormListByName",href:"/user/",
+      rel:["usersByName","search"],root:root},coll);
+    wstl.append({name:"userFormListByEmail",href:"/user/",
+      rel:["usersByEmail","search"],root:root},coll);
 
     // compose and send graph 
     doc = {};
@@ -277,9 +283,7 @@ function sendPasswordPage(req, res, respond, id) {
     // item actions
     wstl.append({name:"userLinkItem",href:"/user/{id}",
       rel:["item"],root:root},coll);
-    wstl.append({name:"userLinkDetail",href:"/user/{id}",
-      rel:["item"],root:root},coll);
-    wstl.append({name:"userLinkEdit",href:"/user/{id}",
+    wstl.append({name:"userLinkEdit",href:"/user/update/{id}",
       rel:["edit"],root:root},coll);
     wstl.append({name:"userLinkChangePW",href:"/user/pass/{id}",
       rel:["changepw","edit"],root:root},coll);
@@ -287,10 +291,16 @@ function sendPasswordPage(req, res, respond, id) {
       rel:["tasksByUser","collection"],root:root},coll);
     
     // item forms
-    tran = wstl.append({name:"userFormChangePW",href:"/user/pass/{id}",
-      rel:["changePW","edit-form"],root:root},coll);
     tran = wstl.append({name:"userFormChangePWPost",href:"/user/pass/{id}",
       rel:["post-changePW","edit-form"],root:root},coll);
+
+    // list queries
+    wstl.append({name:"userFormListByNick",href:"/user/",
+      rel:["usersByNick","search"],root:root},coll);
+    wstl.append({name:"userFormListByName",href:"/user/",
+      rel:["usersByName","search"],root:root},coll);
+    wstl.append({name:"userFormListByEmail",href:"/user/",
+      rel:["usersByEmail","search"],root:root},coll);
 
     // compose and send graph 
     doc = {};
