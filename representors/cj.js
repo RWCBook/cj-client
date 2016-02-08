@@ -175,7 +175,7 @@ function getQueries(obj) {
 
 // get the add template
 function getTemplate(obj) {
-  var data, temp, rtn, tpl, url, d, i, x, j, y;
+  var data, temp, field, rtn, tpl, url, d, i, x, j, y;
   
   rtn = {};
   data = [];
@@ -184,6 +184,8 @@ function getTemplate(obj) {
     for(i=0,x=obj.length;i<x;i++) {
       if(obj[i].target.indexOf("cj-template")!==-1) {
         temp = obj[i];
+        
+        isAdd=obj[i].target.indexOf("add")!==-1;
         
         // build template
         rtn.prompt = temp.prompt;
@@ -201,13 +203,15 @@ function getTemplate(obj) {
         data = [];
         for(j=0,y=temp.inputs.length;j<y;j++) {
           d = temp.inputs[j];
-          data.push(
-            {
-              name:d.name||"input"+j,
-              value:d.value||"",
-              prompt:d.prompt||d.name
-            }
-          );
+          field = {
+            name:d.name||"input"+j,
+            value:(isAdd===true?d.value:g.tvars[d.name])||"",
+            prompt:d.prompt||d.name,
+            required:d.required||false,
+            readOnly:d.readOnly||false,
+            patttern:d.pattern||""
+          };
+          data.push(field);
         }
       }
     }

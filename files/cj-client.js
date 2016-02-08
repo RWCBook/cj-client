@@ -255,7 +255,16 @@ function cj() {
       header.innerHTML = g.cj.collection.template.prompt||"Add";
       d.push(header,fs);
       for(var data of coll) { 
-        p = d.input({prompt:data.prompt+"&nbsp;",name:data.name,value:data.value});
+        p = d.input(
+          {
+            prompt:data.prompt+"&nbsp;",
+            name:data.name,
+            value:data.value,
+            required:data.required,
+            readOnly:data.readOnly,
+            pattern:data.pattern
+          }
+        );
         d.push(p,fs);
       }
       p = d.node("p");
@@ -348,7 +357,11 @@ function cj() {
     return (collection.title && collection.title.length!==-1);
   }
   function hasTemplate(collection) {
-    return (collection.template && Array.isArray(collection.template.data)===true);
+    return (
+      collection.template && 
+      Array.isArray(collection.template.data)===true && 
+      collection.template.data.length!==0
+    );
   }
   function isHiddenLink(link) {
     var rtn = false;

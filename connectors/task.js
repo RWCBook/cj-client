@@ -214,7 +214,7 @@ function sendItemPage(req, res, respond, id) {
     // item forms
     tran = wstl.append({name:"taskFormAdd",href:"/task/{id}",
       rel:["post-edit","edit-form"],root:root},coll);
-
+    
     // compose and send graph 
     doc = {};
     doc.title = "TPS - Tasks";
