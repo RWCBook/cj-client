@@ -7,8 +7,11 @@
  *******************************************************/
 
 var urit = require('uritemplate');
+var utils = require('./../connectors/utils.js');
+
 var g = {};
 g.tvars = {};
+g.profile = {};
 
 // json representor
 module.exports = cj;
@@ -22,6 +25,7 @@ function cj(object, root) {
 
   for(var o in object) {
     g.tvars = {}; // clear item state
+    g.profile = utils.profile(o);
     rtn.collection.href = root+"/"+o+"/".replace(/^\/\//,"http://")||"";
     rtn.collection.title = getTitle(object[o]);
     rtn.collection.content = getContent(object[o]);
@@ -116,7 +120,14 @@ function getItems(obj, root) {
       data = [];
       for(var d in temp) {
         if(d!=="meta") {
-          data.push({name : d, value : temp[d], prompt : d});
+          data.push(
+            {
+              name : d, 
+              value : temp[d], 
+              prompt : (g.profile[d].prompt||d), 
+              display:(g.profile[d].display.toString()||"true")
+            }
+          );
           tvars[d] = temp[d];
         }
       }
@@ -163,7 +174,16 @@ function getQueries(obj) {
         data = [];
         for(j=0,y=query.inputs.length;j<y;j++) {
           d = query.inputs[j];
-          data.push({name:d.name||"input"+j,value:d.value||"",prompt:d.prompt||d.name})
+          data.push(
+            {
+              name:d.name||"input"+j,
+              value:d.value||"",
+              prompt:d.prompt||d.name,
+              required:d.required||false,
+              readOnly:d.readOnly||false,
+              patttern:d.pattern||""              
+            }
+          );
         }
         q.data = data;
         rtn.push(q);

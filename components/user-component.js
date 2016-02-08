@@ -12,11 +12,22 @@ var utils = require('./../connectors/utils.js');
 module.exports = main
 // app-level actions for tasks
 function main(action, args1, args2, args3) {
-  var name, rtn, props;
+  var name, rtn, props, profile;
     
   props = ["id","nick","email","password","name","dateCreated","dateUpdated"];
   elm = 'user';
 
+  // shared user profile for this object
+  profile =  {
+    "id" : {"prompt" : "ID", "display" : false},
+    "nick" : {"prompt" : "Nickname", "display" : true},
+    "email" : {"prompt" : "Email", "display" : true},
+    "name" : {"prompt" : "Full Name", "display" : true},
+    "password" : {"prompt" : "Password", "display" : true},
+    "dateCreated" :  {"prompt" : "Created", "display" : false},
+    "dateUpdated" :  {"prompt" : "Updated", "display" : false}
+  };
+  
   switch (action) {
     case 'exists':
       rtn = (storage(elm, 'item', args1)===null?false:true);
@@ -24,6 +35,9 @@ function main(action, args1, args2, args3) {
     case 'props' :
       rtn = utils.setProps(args1,props);
       break;  
+    case 'profile':
+      rtn = profile;
+      break;
     case 'list':
       rtn = utils.cleanList(storage(elm, 'list'));
       break;

@@ -16,7 +16,6 @@
   - built/tested for chrome browser (YMMV on other browsers)
   - designed to act as a "validator" for a human-driven Cj client.
   - not production robust (missing error-handling, perf-tweaking, etc.)
-  - report issues to https://github.com/collection-json/cj-client
 */
 
 function cj() {
@@ -142,20 +141,41 @@ function cj() {
         buttons.className = "ui mini buttons";
         
         // item link
-        a1 = d.anchor({href:item.href,rel:item.rel,className:"item link ui basic blue button",text:item.rel});
+        a1 = d.anchor(
+          {
+            href:item.href,
+            rel:item.rel,
+            className:"item link ui basic blue button",
+            text:item.rel
+          }
+        );
         a1.onclick = httpGet;
         d.push(a1,buttons);
         
         // edit link
         if(isReadOnly(item)===false && hasTemplate(g.cj.collection)===true) {
-          a2 = d.anchor({href:item.href,rel:"edit",className:"item action ui positive button",text:"Edit"});
+          a2 = d.anchor(
+            {
+              href:item.href,
+              rel:"edit",
+              className:"item action ui positive button",
+              text:"Edit"
+            }
+          );
           a2.onclick = cjEdit;
           d.push(a2, buttons);
         }
 
         // delete link
         if(isReadOnly(item)===false) {
-          a3 = d.anchor({href:item.href,className:"item action ui negative button",rel:"delete",text:"Delete"});
+          a3 = d.anchor(
+            {
+              href:item.href,
+              className:"item action ui negative button",
+              rel:"delete",
+              text:"Delete"
+            }
+          );
           a3.onclick = httpDelete;
           d.push(a3,buttons);
         }
@@ -165,8 +185,16 @@ function cj() {
         table = d.node("table");
         table.className = "ui very basic collapsing celled table";
         for(var data of item.data) {
-          tr = d.data_row({className:"item "+data.name,text:data.prompt+"&nbsp;",value:data.value+"&nbsp;"});
-          d.push(tr,table);
+          if(data.display==="true") {
+            tr = d.data_row(
+              {
+                className:"item "+data.name,
+                text:data.prompt+"&nbsp;",
+                value:data.value+"&nbsp;"
+              }
+            );
+            d.push(tr,table);
+          }
         }
         if(item.links) {
           for(var link of item.links) {
@@ -175,11 +203,24 @@ function cj() {
             
             // render as images, if asked
             if(isImage(link)===true) {
-              img = d.image({className:"image "+link.rel,rel:link.rel,href:link.href});         
+              img = d.image(
+                {
+                  className:"image "+link.rel,
+                  rel:link.rel,
+                  href:link.href
+                }
+              );         
               d.push(img, p);
             }
             else {
-              a = d.anchor({className:"item",href:link.href,rel:link.rel,text:link.prompt});
+              a = d.anchor(
+                {
+                  className:"item",
+                  href:link.href,
+                  rel:link.rel,
+                  text:link.prompt
+                }
+              );
               a.onclick = httpGet;
               d.push(a, p);
             }
@@ -365,7 +406,11 @@ function cj() {
   }
   function isHiddenLink(link) {
     var rtn = false;
-    if(link.render && (link.render==="none" || link.render==="hidden" || link.rel==="stylesheet")) {
+    if(link.render && 
+      (link.render==="none" || 
+       link.render==="hidden" || 
+       link.rel==="stylesheet")) 
+    {
       rtn = true;
     }
     return rtn;
@@ -390,7 +435,8 @@ function cj() {
     rtn = null;
     coll = g.cj.collection.items;
     for(var item of coll) {
-      if(item.href.replace('http:','').replace('https:','')===url.replace('http:','').replace('https:','')) {
+      if(item.href.replace('http:','').replace('https:','')===
+        url.replace('http:','').replace('https:','')) {
         rtn = item;
         break;
       }

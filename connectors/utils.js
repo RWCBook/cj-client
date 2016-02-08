@@ -10,6 +10,10 @@ var fs = require('fs');
 var qs = require('querystring');
 var folder = process.cwd() + '/files/';
 
+// for profile work
+var task = require('./../components/task-component.js');
+var user = require('./../components/user-component.js');
+
 // for handling hal-forms extension
 var halFormType = "application/prs.hal-forms+json";
 var sirenSopType = "application/prs.siren-sop+json";
@@ -33,6 +37,24 @@ exports.actionMethod = function(action, protocol) {
       break;
     default:
       rtn = "GET";
+  }
+  return rtn;
+}
+
+// export object profiles
+exports.profile = function(name) {
+  var rtn;
+  
+  switch(name.toLowerCase()) {
+    case "task":
+      rtn = task("profile");
+      break;
+    case "user":
+      rtn = user("profile");
+      break;
+    default:
+      rtn = {};
+      break;
   }
   return rtn;
 }
