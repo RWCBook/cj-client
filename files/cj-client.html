@@ -11,29 +11,42 @@
   <head>
     <title>Cj</title>
     <link href="./semantic.min.css" rel="stylesheet" />
+    <style>
+    #items, #template, #queries-container, #edit, #dump {display:none;}
+    @media only screen and (max-width:767px) {
+      .ui.stackable.grid > .column:not(.row) {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+    </style>
   </head>
   <body>
     <div id="links"></div>
-    <p style="margin:.5em;">&nbsp;</p>
-    <h1 id="title" class="ui page header"></h1>
-    <div id="content" style="margin-bottom: 1em"></div>
-    <div class="ui two column grid" style="margin-top: 2em">
-      <div class="column">
-        <div id="items" class="ui segments"></div>
-      </div>
-      <div class="column">
-        <div id="edit" class="ui green segment"></div>
-        <div id="template" class="ui green segment"></div>
-        <div id="error"></div>
-        <h1 class="ui dividing header">
-          Queries
-        </h1>
-        <div id="queries"></div>
-      </div>
-    </div>
+    <div style="margin: 5em 1em">
+      <h1 id="title" class="ui page header"></h1>
+      <div id="content" style="margin-bottom: 1em"></div>
+      <div class="ui mobile reversed two column stackable grid">
+        <div class="column">
+          <div id="items" class="ui segments"></div>
+        </div>
+        <div class="column">
+          <div id="edit" class="ui green segment"></div>
+          <div id="template" class="ui green segment"></div>
+          <div id="error"></div>
 
-    <div>
-      <pre id="dump"></pre>
+          <div id="queries-wrapper">
+            <h1 class="ui dividing header">
+              Queries
+            </h1>
+            <div id="queries"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <pre id="dump"></pre>
+      </div>
     </div>
   </body>
   <script src="dom-help.js">//na </script>

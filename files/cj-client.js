@@ -104,17 +104,18 @@ function cj() {
         }
         
         // render embedded images, if asked
-        item = d.node("li");
-        item.className = "item";
         if(isImage(link)===true) {
+          item = d.node("div");
+          item.className = "item";
           img = d.image({href:link.href,className:link.rel});
           d.push(img, item);
+          d.push(item, menu);
         }
         else {
-          a = d.anchor({rel:link.rel,href:link.href,text:link.prompt});
-          d.push(a, item);
+          a = d.anchor({rel:link.rel,href:link.href,text:link.prompt,
+            className: "item"});
+          d.push(a, menu);
         }
-        d.push(item, menu);
       }
       d.push(menu, elm);
     }
@@ -179,11 +180,49 @@ function cj() {
           a3.onclick = httpDelete;
           d.push(a3,buttons);
         }
+
         d.push(buttons,segment);
+
+        if(item.links) {
+          secondary_buttons = d.node("div");
+          secondary_buttons.className = "ui mini buttons right floated";
+
+          for(var link of item.links) {
+            // render as images, if asked
+            // TODO: test this with the new semantic-ui styling
+            if(isImage(link)===true) {
+              p = d.node("p");
+              p.className = "ui basic button";
+              img = d.image(
+                {
+                  className:"image "+link.rel,
+                  rel:link.rel,
+                  href:link.href
+                }
+              );         
+              d.push(img, p);
+              d.push(p,secondary_buttons);
+            }
+            else {
+              a = d.anchor(
+                {
+                  className:"ui basic blue button",
+                  href:link.href,
+                  rel:link.rel,
+                  text:link.prompt
+                }
+              );
+              a.onclick = httpGet;
+              d.push(a,secondary_buttons);
+            }
+          }
+          d.push(secondary_buttons,segment);
+        }
+
         d.push(segment,elm);
-        
+
         table = d.node("table");
-        table.className = "ui very basic collapsing celled table";
+        table.className = "ui table";
         for(var data of item.data) {
           if(data.display==="true") {
             tr = d.data_row(
@@ -196,52 +235,25 @@ function cj() {
             d.push(tr,table);
           }
         }
-        if(item.links) {
-          for(var link of item.links) {
-            p = d.node("p");
-            p.className = "item";
-            
-            // render as images, if asked
-            if(isImage(link)===true) {
-              img = d.image(
-                {
-                  className:"image "+link.rel,
-                  rel:link.rel,
-                  href:link.href
-                }
-              );         
-              d.push(img, p);
-            }
-            else {
-              a = d.anchor(
-                {
-                  className:"item",
-                  href:link.href,
-                  rel:link.rel,
-                  text:link.prompt
-                }
-              );
-              a.onclick = httpGet;
-              d.push(a, p);
-            }
-            d.push(p,table);
-          }
-        }
         d.push(table,segment);
       }
+    }
+    if (elm.hasChildNodes()) {
+      elm.style.display = "block";
+    } else {
+      elm.style.display = "none";
     }
   }
   
   // handle query collection
   function queries() {
     var elm, coll;
-    var container, segment;
+    var segment;
     var form, fs, header, p, lbl, inp;
 
     elm = d.find("queries");
     d.clear(elm);
     if(g.cj.collection.queries) {
-      container = d.node("div");
       coll = g.cj.collection.queries;
       for(var query of coll) {
         segment = d.node("div");
@@ -269,9 +281,15 @@ function cj() {
         d.push(p,fs);
         d.push(fs,form);
         d.push(form,segment);
-        d.push(segment,container);
+        d.push(segment,elm);
       }
-      d.push(container,elm);
+
+      var wrapper = d.find("queries-wrapper");
+      if (elm.hasChildNodes()) {
+        wrapper.style.display = "block";
+      } else {
+        wrapper.style.display = "none";
+      }
     }
   }
   
@@ -310,12 +328,18 @@ function cj() {
       }
       p = d.node("p");
       inp = d.node("input");
-      inp.className = "ui submit button";
+      inp.className = "ui positive mini submit button";
       inp.type = "submit";
       d.push(inp,p);
       d.push(p,fs);
       d.push(fs,form);
       d.push(form, elm);
+    }
+
+    if (elm.hasChildNodes()) {
+      elm.style.display = "block";
+    } else {
+      elm.style.display = "none";
     }
   }
   
@@ -377,7 +401,7 @@ function cj() {
       }
       p = d.node("p");
       inp = d.node("input");
-      inp.className = "ui submit button";
+      inp.className = "ui positive mini submit button";
       inp.type = "submit";
       d.push(inp,p);
       d.push(p,fs);
