@@ -183,7 +183,7 @@ function cj() {
         d.push(segment,elm);
         
         table = d.node("table");
-        table.className = "ui very basic collapsing celled table";
+        table.className = "ui table";
         for(var data of item.data) {
           if(data.display==="true") {
             tr = d.data_row(
@@ -310,7 +310,7 @@ function cj() {
       }
       p = d.node("p");
       inp = d.node("input");
-      inp.className = "ui submit button";
+      inp.className = "ui positive mini submit button";
       inp.type = "submit";
       d.push(inp,p);
       d.push(p,fs);
@@ -377,7 +377,7 @@ function cj() {
       }
       p = d.node("p");
       inp = d.node("input");
-      inp.className = "ui submit button";
+      inp.className = "ui positive mini submit button";
       inp.type = "submit";
       d.push(inp,p);
       d.push(p,fs);
