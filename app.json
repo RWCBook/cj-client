@@ -1,7 +1,7 @@
 {
-  "name": "Task Processing (SIREN-SOP)",
-  "description": "The SIREN-SOP version of the TPS sample NodeJS app from @RWCBook",
-  "repository": "https://github.com/RWCBook/siren-client-sop",
+  "name": "Task Processing (Cj-Client)",
+  "description": "The Collection+JSON version of the TPS sample NodeJS app from @RWCBook",
+  "repository": "https://github.com/RWCBook/cj-client-sop",
   "logo": "https://avatars2.githubusercontent.com/u/16432667?v=3&s=200",
   "keywords": [
     "Hypermedia", 
@@ -9,9 +9,8 @@
     "RWCBook", 
     "JSON", 
     "Client", 
-    "Siren", 
-    "Swiber", 
-    "Siren Object Profile", 
-    "SOP"
+    "collection", 
+    "Amundsen", 
+    "Cj"
   ]
 }

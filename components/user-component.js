@@ -17,7 +17,7 @@ function main(action, args1, args2, args3) {
   props = ["id","nick","email","password","name","dateCreated","dateUpdated"];
   elm = 'user';
 
-  // shared user profile for this object
+  // shared profile for this object
   profile =  {
     "id" : {"prompt" : "ID", "display" : false},
     "nick" : {"prompt" : "Nickname", "display" : true},
