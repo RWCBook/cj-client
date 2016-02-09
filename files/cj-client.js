@@ -179,9 +179,47 @@ function cj() {
           a3.onclick = httpDelete;
           d.push(a3,buttons);
         }
+
         d.push(buttons,segment);
+
+        if(item.links) {
+          secondary_buttons = d.node("div");
+          secondary_buttons.className = "ui mini buttons right floated";
+
+          for(var link of item.links) {
+            // render as images, if asked
+            // TODO: test this with the new semantic-ui styling
+            if(isImage(link)===true) {
+              p = d.node("p");
+              p.className = "ui basic button";
+              img = d.image(
+                {
+                  className:"image "+link.rel,
+                  rel:link.rel,
+                  href:link.href
+                }
+              );         
+              d.push(img, p);
+              d.push(p,secondary_buttons);
+            }
+            else {
+              a = d.anchor(
+                {
+                  className:"ui basic blue button",
+                  href:link.href,
+                  rel:link.rel,
+                  text:link.prompt
+                }
+              );
+              a.onclick = httpGet;
+              d.push(a,secondary_buttons);
+            }
+          }
+          d.push(secondary_buttons,segment);
+        }
+
         d.push(segment,elm);
-        
+
         table = d.node("table");
         table.className = "ui table";
         for(var data of item.data) {
@@ -194,37 +232,6 @@ function cj() {
               }
             );
             d.push(tr,table);
-          }
-        }
-        if(item.links) {
-          for(var link of item.links) {
-            p = d.node("p");
-            p.className = "item";
-            
-            // render as images, if asked
-            if(isImage(link)===true) {
-              img = d.image(
-                {
-                  className:"image "+link.rel,
-                  rel:link.rel,
-                  href:link.href
-                }
-              );         
-              d.push(img, p);
-            }
-            else {
-              a = d.anchor(
-                {
-                  className:"item",
-                  href:link.href,
-                  rel:link.rel,
-                  text:link.prompt
-                }
-              );
-              a.onclick = httpGet;
-              d.push(a, p);
-            }
-            d.push(p,table);
           }
         }
         d.push(table,segment);
