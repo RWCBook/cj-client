@@ -104,17 +104,18 @@ function cj() {
         }
         
         // render embedded images, if asked
-        item = d.node("li");
-        item.className = "item";
         if(isImage(link)===true) {
+          item = d.node("div");
+          item.className = "item";
           img = d.image({href:link.href,className:link.rel});
           d.push(img, item);
+          d.push(item, menu);
         }
         else {
-          a = d.anchor({rel:link.rel,href:link.href,text:link.prompt});
-          d.push(a, item);
+          a = d.anchor({rel:link.rel,href:link.href,text:link.prompt,
+            className: "item"});
+          d.push(a, menu);
         }
-        d.push(item, menu);
       }
       d.push(menu, elm);
     }
