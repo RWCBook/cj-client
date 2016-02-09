@@ -12,7 +12,7 @@
     <title>Cj</title>
     <link href="./semantic.min.css" rel="stylesheet" />
     <style>
-    #dump {display:none;}
+    #items, #template, #queries-container, #edit, #dump {display:none;}
     @media only screen and (max-width:767px) {
       .ui.stackable.grid > .column:not(.row) {
         padding-left: 0 !important;
@@ -34,10 +34,13 @@
           <div id="edit" class="ui green segment"></div>
           <div id="template" class="ui green segment"></div>
           <div id="error"></div>
-          <h1 class="ui dividing header">
-            Queries
-          </h1>
-          <div id="queries"></div>
+
+          <div id="queries-wrapper">
+            <h1 class="ui dividing header">
+              Queries
+            </h1>
+            <div id="queries"></div>
+          </div>
         </div>
       </div>
 

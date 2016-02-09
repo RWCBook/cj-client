@@ -238,18 +238,22 @@ function cj() {
         d.push(table,segment);
       }
     }
+    if (elm.hasChildNodes()) {
+      elm.style.display = "block";
+    } else {
+      elm.style.display = "none";
+    }
   }
   
   // handle query collection
   function queries() {
     var elm, coll;
-    var container, segment;
+    var segment;
     var form, fs, header, p, lbl, inp;
 
     elm = d.find("queries");
     d.clear(elm);
     if(g.cj.collection.queries) {
-      container = d.node("div");
       coll = g.cj.collection.queries;
       for(var query of coll) {
         segment = d.node("div");
@@ -277,9 +281,15 @@ function cj() {
         d.push(p,fs);
         d.push(fs,form);
         d.push(form,segment);
-        d.push(segment,container);
+        d.push(segment,elm);
       }
-      d.push(container,elm);
+
+      var wrapper = d.find("queries-wrapper");
+      if (elm.hasChildNodes()) {
+        wrapper.style.display = "block";
+      } else {
+        wrapper.style.display = "none";
+      }
     }
   }
   
@@ -324,6 +334,12 @@ function cj() {
       d.push(p,fs);
       d.push(fs,form);
       d.push(form, elm);
+    }
+
+    if (elm.hasChildNodes()) {
+      elm.style.display = "block";
+    } else {
+      elm.style.display = "none";
     }
   }
   
