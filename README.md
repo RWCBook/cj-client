@@ -1,4 +1,4 @@
-# CJ-CLIENT-SOP
+# CJ-CLIENT
 
 #### TPS - Task Processing Service (CJ-CLIENT)
 
