@@ -28,12 +28,13 @@ function cj() {
   g.ctype = "application/vnd.collection+json";
 
   // init library and start
-  function init(url) {
+  function init(url, title) {
     if(!url || url==='') {
       alert('*** ERROR:\n\nMUST pass starting URL to the Cj library');
     }
     else {
       g.url = url;
+      g.title = title||"Cj Client";
       req(g.url,"get");
     }
   }
@@ -59,13 +60,15 @@ function cj() {
   
   // handle title
   function title() {
-    var elm;
-    
+    var elm, str;
+
+
     if(hasTitle(g.cj.collection)===true) {
+      str = g.cj.collection.title||g.title;
       elm = d.find("title");
-      elm.innerText = g.cj.collection.title;
+      elm.innerText = str;
       elm = d.tags("title");
-      elm[0].innerText = g.cj.collection.title;
+      elm[0].innerText = str;
     }
   }
 
@@ -74,8 +77,9 @@ function cj() {
     var elm;
 
     elm = d.find("content");
-    if(g.cj.collection.content) {
-      elm.innerHTML = g.cj.collection.content; 
+    d.clear(elm);
+    if(g.cj.collection.content && (typeof g.cj.collection.content)==="string") {
+      elm.innerHTML = g.cj.collection.content.toString(); 
     }
   }
   
@@ -352,10 +356,13 @@ function cj() {
     if(g.cj.collection.error) {
       obj = g.cj.collection.error;
 
-      p = d.para({className:"code",text:obj.code});
+      p = d.para({className:"title",text:obj.title});
       d.push(p,elm);
 
-      p = d.para({className:"title",text:obj.title});
+      p = d.para({className:"message",text:obj.message});
+      d.push(p,elm);
+
+      p = d.para({className:"code",text:obj.code});
       d.push(p,elm);
 
       p = d.para({className:"url",text:obj.url});

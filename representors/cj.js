@@ -51,7 +51,7 @@ function cj(object, root) {
 
 // belt out the title
 function getTitle(obj) {
-  return obj.title||"Cj Representor";
+  return obj.title||"";
 }
 
 // handle any content in the response
@@ -310,5 +310,6 @@ function getError(obj) {
   
   return rtn;
 }
+
 // EOF
 
