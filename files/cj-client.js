@@ -62,7 +62,6 @@ function cj() {
   function title() {
     var elm, str;
 
-
     if(hasTitle(g.cj.collection)===true) {
       str = g.cj.collection.title||g.title;
       elm = d.find("title");
@@ -112,8 +111,8 @@ function cj() {
           item = d.node("div");
           item.className = "item";
           img = d.image({href:link.href,className:link.rel});
-          d.push(img, item);
-          d.push(item, menu);
+          d.push(img, item, menu);
+          //d.push(item, menu);
         }
         else {
           a = d.anchor({rel:link.rel,href:link.href,text:link.prompt,
@@ -130,8 +129,7 @@ function cj() {
     var elm, coll;
     var ul, li;
     var segment, buttons, table;
-    var p, img;
-    var a1, a2, a3;
+    var p, img, a;
 
     elm = d.find("items");
     d.clear(elm);
@@ -146,7 +144,7 @@ function cj() {
         buttons.className = "ui mini buttons";
         
         // item link
-        a1 = d.anchor(
+        a = d.anchor(
           {
             href:item.href,
             rel:item.rel,
@@ -154,12 +152,12 @@ function cj() {
             text:item.rel
           }
         );
-        a1.onclick = httpGet;
-        d.push(a1,buttons);
+        a.onclick = httpGet;
+        d.push(a,buttons);
         
         // edit link
         if(isReadOnly(item)===false && hasTemplate(g.cj.collection)===true) {
-          a2 = d.anchor(
+          a = d.anchor(
             {
               href:item.href,
               rel:"edit",
@@ -167,13 +165,13 @@ function cj() {
               text:"Edit"
             }
           );
-          a2.onclick = cjEdit;
-          d.push(a2, buttons);
+          a.onclick = cjEdit;
+          d.push(a, buttons);
         }
 
         // delete link
         if(isReadOnly(item)===false) {
-          a3 = d.anchor(
+          a = d.anchor(
             {
               href:item.href,
               className:"item action ui negative button",
@@ -181,8 +179,8 @@ function cj() {
               text:"Delete"
             }
           );
-          a3.onclick = httpDelete;
-          d.push(a3,buttons);
+          a.onclick = httpDelete;
+          d.push(a,buttons);
         }
 
         d.push(buttons,segment);
@@ -204,8 +202,7 @@ function cj() {
                   href:link.href
                 }
               );         
-              d.push(img, p);
-              d.push(p,secondary_buttons);
+              d.push(img, p, secondary_buttons);
             }
             else {
               a = d.anchor(
@@ -281,11 +278,7 @@ function cj() {
         inp = d.node("input");
         inp.type = "submit";
         inp.className = "ui mini submit button";
-        d.push(inp,p);
-        d.push(p,fs);
-        d.push(fs,form);
-        d.push(form,segment);
-        d.push(segment,elm);
+        d.push(inp, p, fs, form, segment, elm);
       }
 
       var wrapper = d.find("queries-wrapper");
@@ -334,10 +327,7 @@ function cj() {
       inp = d.node("input");
       inp.className = "ui positive mini submit button";
       inp.type = "submit";
-      d.push(inp,p);
-      d.push(p,fs);
-      d.push(fs,form);
-      d.push(form, elm);
+      d.push(inp, p, fs, form, elm);
     }
 
     if (elm.hasChildNodes()) {
@@ -410,10 +400,7 @@ function cj() {
       inp = d.node("input");
       inp.className = "ui positive mini submit button";
       inp.type = "submit";
-      d.push(inp,p);
-      d.push(p,fs);
-      d.push(fs,form);
-      d.push(form, elm);
+      d.push(inp, p, fs, form, elm);
       elm.style.display = "block";
     }
     return false;
