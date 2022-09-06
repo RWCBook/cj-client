@@ -129,6 +129,10 @@ function getItems(obj, root) {
             }
           );
           tvars[d] = temp[d];
+          
+          if(d==='id') {
+            item.id = temp[d];
+          }
         }
       }
       item.data = data;

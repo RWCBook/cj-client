@@ -6,9 +6,6 @@
   "scripts": {
     "start": "node app.js"
   },
-  "engines": {
-    "node": "0.10.25"
-  },
   "dependencies" : { 
     "uritemplate" : "0.3.4"
   },
