@@ -73,7 +73,7 @@ function handler(req, res) {
       parts.push(segments[i]);
     }
   }
-  
+ 
   // handle options call
   if(req.method==="OPTIONS") {
     sendResponse(req, res, "", 200);
